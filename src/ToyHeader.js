@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+// const ToyHeader = () => {}
 function ToyHeader() {
   return (
       <div id="toy-header">
