@@ -34,14 +34,10 @@ class ToysContainer extends React.Component {
         }
       )
     }, () => console.log(this.state))
-
-
-
     // console.log(e.target)
   }
 
 
-  
   render() {
     console.log('rendering')
     return (

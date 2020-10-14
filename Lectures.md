@@ -1,8 +1,14 @@
 # Intro To React
 
 ## Key Topics
+
+10/13
 * State & Events
   * Changing state/props in other components - where is the best place to hold information
+* Lifecycle Methods
+* Which Lifecycle Methods exist and when to use them?
+* Best lifecycle methods for making fetches
+
 
 10/8 Thurs
 * Thinking in React - Toy Tale again!

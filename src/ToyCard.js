@@ -1,21 +1,33 @@
 import React from 'react'
 
 
-const ToyCard = (props) => {
-  return (
-    <div className="card">
-         <h2> {props.name} </h2>
-         <img alt={props.name} src={props.img} className="toy-avatar"/>
-         <p>{props.likes}  Likes </p>
-         <button 
-          className="like-btn" 
-          onClick={props.addLike}
-          data-toyname={props.name}
-          >
-            Like &lt;3
-          </button> 
-    </div>
-  );
+class ToyCard extends React.Component {
+
+  componentDidMount() {
+    console.log('In mounting fn')
+  }
+  
+  componentDidUpdate() {
+    console.log(`This component ${this.props.name} has changed`)
+  }
+
+  render(){
+    console.log('rendering ToyCard')
+    return (
+      <div className="card">
+           <h2> {this.props.name} </h2>
+           <img alt={this.props.name} src={this.props.img} className="toy-avatar"/>
+           <p>{this.props.likes}  Likes </p>
+           <button 
+            className="like-btn" 
+            onClick={this.props.addLike}
+            data-toyname={this.props.name}
+            >
+              Like &lt;3
+            </button> 
+      </div>
+    );
+  }
 }
 
 export default ToyCard;
