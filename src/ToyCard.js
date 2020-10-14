@@ -55,5 +55,3 @@ class ToyCard extends Component {
     );
   }
 }
-
-export default ToyCard;
