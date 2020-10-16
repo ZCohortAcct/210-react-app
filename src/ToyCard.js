@@ -2,10 +2,6 @@ import React from 'react'
 
 
 class ToyCard extends React.Component {
-
-  componentDidMount() {
-    console.log('In mounting fn')
-  }
   
   componentDidUpdate() {
     console.log(`This component ${this.props.name} has changed`)
