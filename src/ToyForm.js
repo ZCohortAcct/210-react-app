@@ -6,25 +6,8 @@ class ToyForm extends Component {
     toyImage:''
    }
   
-  //  handleToyNameInput = (e) => {
-  //   // console.log(e.target.value)
-  //   this.setState({toyName: e.target.value})
-  // }
-
-  // handleToyImageInput = (e) => {
-  //   // console.log(e.target)
-  //   this.setState({toyImage: e.target.value})
-  // }
 
   handleInput = (e) => {
-    // console.log(e.target.name)
-    
-    // TypeError: Cannot read property 'value' of null 
-    // e.persist()
-    // let value = e.target.value
-    // let inputName = e.target.name
-    // this.setState({[inputName]: value}, ()=>console.log(this.state))
-
     this.setState({[e.target.name]: e.target.value}, () => console.log(this.state))
   }
 
