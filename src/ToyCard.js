@@ -17,7 +17,7 @@ class ToyCard extends React.Component {
            <button 
             className="like-btn" 
             onClick={this.props.addLike}
-            data-toyname={this.props.name}
+            data-toyid={this.props.id}
             >
               Like &lt;3
             </button> 

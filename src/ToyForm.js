@@ -17,7 +17,10 @@ class ToyForm extends Component {
       "image": this.state.toyImage,
       "likes": 0
     }
-    this.props.addToyToToyArr(serverData)
+
+    this.props.addToyToToyArr(serverData).then( newToy => this.props.history.push(`/toys/${newToy.id}`) )
+    
+    // debugger
 
     this.setState({ 
       toyName: '',

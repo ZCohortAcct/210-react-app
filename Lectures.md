@@ -1,6 +1,15 @@
 # Intro To React
 
 ## Key Topics
+10/22
+* Code Update functionality
+* Add React Routing  
+
+10/20
+* Code Review
+* Basic React Fundament Q-n-A
+
+
 10/15
 * ASYNC, Forms
   * Using controlled forms and sending POST requests

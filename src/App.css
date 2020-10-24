@@ -4,7 +4,7 @@ body {
 }
 
 #toy-header {
-  display: flex;
+  display: block;
   justify-content: center;
   background: #515DA2;
   opacity: .8;

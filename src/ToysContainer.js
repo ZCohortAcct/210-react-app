@@ -9,11 +9,12 @@ const ToysContainer = (props) => {
         {
           props.toysArray.map(toyObj => {
             return (
-              <ToyCard  key={toyObj.name}
+              <ToyCard  key={toyObj.id}
                         name={toyObj.name} 
                         img={toyObj.image} 
                         likes={toyObj.likes}
                         addLike={props.addLikeFn}
+                        id={toyObj.id}
               />
             )
           })
