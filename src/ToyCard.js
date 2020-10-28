@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-class ToyCard extends React.Component {
+class ToyCard extends React.PureComponent {
   
   componentDidUpdate() {
     console.log(`This component ${this.props.name} has changed`)
@@ -20,6 +20,14 @@ class ToyCard extends React.Component {
             data-toyid={this.props.id}
             >
               Like &lt;3
+            </button> 
+
+            <button 
+            className="delete-btn" 
+            onClick={this.props.deleteToy}
+            data-toyid={this.props.id}
+            >
+              Remove
             </button> 
       </div>
     );

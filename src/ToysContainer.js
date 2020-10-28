@@ -7,13 +7,14 @@ const ToysContainer = (props) => {
     return (
       <div id="toy-container">
         {
-          props.toysArray.map(toyObj => {
+          props.arrOfToys.map(toyObj => {
             return (
               <ToyCard  key={toyObj.id}
                         name={toyObj.name} 
                         img={toyObj.image} 
                         likes={toyObj.likes}
                         addLike={props.addLikeFn}
+                        deleteToy={props.deleteToyFn}
                         id={toyObj.id}
               />
             )

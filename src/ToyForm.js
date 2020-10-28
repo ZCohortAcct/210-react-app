@@ -6,6 +6,7 @@ class ToyForm extends Component {
     toyImage:''
    }
   
+  
 
   handleInput = (e) => {
     this.setState({[e.target.name]: e.target.value}, () => console.log(this.state))
@@ -27,7 +28,6 @@ class ToyForm extends Component {
       toyImage:''
      })
   } 
-
   
   render() {
     return (
@@ -39,7 +39,7 @@ class ToyForm extends Component {
         />
 
         <label>Image URL</label>
-        <input name="toyImage" 
+        <input name='toyImage'
           onChange={this.handleInput} 
           value={this.state.toyImage}
         />

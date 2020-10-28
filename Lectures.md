@@ -1,6 +1,10 @@
 # Intro To React
 
 ## Key Topics
+10/27 
+* Code Review
+* Code Update functionalitye
+
 10/22
 * Code Update functionality
 * Add React Routing  

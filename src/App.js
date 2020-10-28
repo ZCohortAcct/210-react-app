@@ -38,7 +38,9 @@ export default class App extends React.Component {
     })
     .then(res => res.json())
     .then(udpatedToyObj => {
-      this.setState((preState) => ({toysArray: preState.toysArray.map(toyObj => (toyObj.name === foundToy.name) ? {...toyObj, likes: toyObj.likes + 1 } : toyObj)}), () => console.log(this.state))
+      this.setState((preState) => (
+        {toysArray: preState.toysArray.map(toyObj => (toyObj.name === foundToy.name) ? {...toyObj, likes: toyObj.likes + 1 } : toyObj)}
+      ), () => console.log(this.state))
     })
 
 
@@ -56,6 +58,23 @@ export default class App extends React.Component {
     //   )
     // }, () => console.log(this.state))
     // console.log(e.target)
+  }
+
+  deleteToy = (e) => {
+    let toyId = parseInt(e.target.dataset.toyid);
+    console.log(toyId)
+    fetch(`http://localhost:2000/toys/${toyId}`, {
+      method: "delete",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      }
+    })
+    .then(resp => resp.json())
+    .then(deletedObj => this.setState((preState) => (
+      {toysArray: preState.toysArray.filter(toyObj => toyObj.id !== toyId)}
+      ))
+    )
   }
 
   addNewToy = (newToy) => {
@@ -110,6 +129,7 @@ export default class App extends React.Component {
                         likes={toyObj.likes}
                         addLike={this.addLike}
                         id={toyObj.id}
+                        deleteToy={this.deleteToy}
               />
             )
             } else {
@@ -119,7 +139,7 @@ export default class App extends React.Component {
         />
 
         <Route path='/toys'>
-          < ToysContainer toysArray={this.state.toysArray} addLikeFn={this.addLike}/>
+          <ToysContainer arrOfToys={this.state.toysArray} addLikeFn={this.addLike} deleteToyFn={this.deleteToy}/>
         </Route>
       </Switch>
         
