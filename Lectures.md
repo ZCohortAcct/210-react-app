@@ -6,6 +6,7 @@
 
 * Understanding Context
   * Provider and Consumer
+  * Context Intro Code, https://github.com/ZCohortAcct/react-context-intro0210
 
 * Adding in Redux
   * Create files for Actions and Reducers

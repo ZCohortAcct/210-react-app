@@ -14,7 +14,6 @@ const ToysContainer = (props) => {
                         img={toyObj.image} 
                         likes={toyObj.likes}
                         addLike={props.addLikeFn}
-                        deleteToy={props.deleteToyFn}
                         id={toyObj.id}
               />
             )

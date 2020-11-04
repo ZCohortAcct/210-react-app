@@ -4,20 +4,22 @@ import ToyForm from './ToyForm.js'
 import ToysContainer from './ToysContainer.js'
 import { Route, Switch } from "react-router-dom";
 import ToyCard from './ToyCard'
-
+import { connect } from "react-redux";
+import { getToys } from './redux/toyActions'
 
 // change server port
 // json-server --watch db.json --port 2000
 
-export default class App extends React.Component {
-  state = {
-    toysArray: []
-  }
+class App extends React.Component {
+  // this.props.getToys()
+
+  // state = {
+  //   toysArray: []
+  // }
 
   componentDidMount() {
-   fetch('http://localhost:2000/toys')
-   .then(res => res.json())
-   .then(severData => this.setState({toysArray: severData}))
+    // add code
+    this.props.getToysWithDispatch()
   }
 
   addLike = (e) => {
@@ -60,23 +62,6 @@ export default class App extends React.Component {
     // console.log(e.target)
   }
 
-  deleteToy = (e) => {
-    let toyId = parseInt(e.target.dataset.toyid);
-    console.log(toyId)
-    fetch(`http://localhost:2000/toys/${toyId}`, {
-      method: "delete",
-      headers: {
-        'Content-Type': 'application/json',
-        'Accepts': 'application/json'
-      }
-    })
-    .then(resp => resp.json())
-    .then(deletedObj => this.setState((preState) => (
-      {toysArray: preState.toysArray.filter(toyObj => toyObj.id !== toyId)}
-      ))
-    )
-  }
-
   addNewToy = (newToy) => {
     return (
       fetch("http://localhost:2000/toys", {
@@ -102,7 +87,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    // console.log('App Render')
+    console.log(this.props)
     return (
       <div className="Main">
          < ToyHeader />
@@ -117,7 +102,7 @@ export default class App extends React.Component {
             // console.log(routerProps.match.params)
             const toyId = parseInt(routerProps.match.params.id)
 
-            const toyObj = this.state.toysArray.find(toyArrObj => toyArrObj.id === toyId)
+            const toyObj = this.props.toysArr.find(toyArrObj => toyArrObj.id === toyId)
 
             // console.log(toyObj)
 
@@ -139,10 +124,51 @@ export default class App extends React.Component {
         />
 
         <Route path='/toys'>
-          <ToysContainer arrOfToys={this.state.toysArray} addLikeFn={this.addLike} deleteToyFn={this.deleteToy}/>
+          <ToysContainer arrOfToys={this.props.toysArr} addLikeFn={this.addLike} />
+          {/* <div>Display Toys here</div> */}
         </Route>
       </Switch>
         
       </div>
     )}
 } 
+// store = {
+//   toyReducer: {toysArr: []},
+//   otherReducer: {otherInfo: {}}
+// }
+// store.toysReducer.toysArr
+
+// mSTP == mapStateToProps
+// const mSTP = (store) => {
+  // console.log(store)
+
+// if store = [], in reducer
+// return {toysArray: store}
+
+// store = {toysArr: []}
+// return {toysArray: store.toysArr}
+// }
+
+
+const mSTP = (store) => store // give access to getState() frm store
+
+  
+const mDSTP = (dispatch) => { // give access to dispatch() frm store
+  return {
+    getToysWithDispatch: () => dispatch(getToys())
+  }
+}
+
+export default connect(mSTP, mDSTP)(App)
+
+//CONNECT TAKES TWO ARGUMENTS
+//THE FIRST ARGUMENT IS A FUNCTION THAT WILL RECEIVE STATE FROM CONNECT AS AN ARGUMENT
+//THE FUNCTION SHOULD RETURN AN OBJECT THAT WILL BE MERGED TO THIS COMPONENT'S PROPS
+//THE CONVENTIONAL NAME FOR THIS FUNCTION IS MAPSTATETOPROPS (but you can obvs call it whatever you want)
+
+//THE SECOND ARGUMENT IS CONVENTIONALLY NAMED MAPDISPATCHTOPROPS, BUT IF YOU DON'T PROVIDE IT, CONNECT WILL AUTOMATICALLY PUT THE DISPATCH FUNCTION IN PROPS FOR YOU TO USE
+//MAPDISPATCH TO PROPS IS A FUNCTION THAT WILL RECEIVE DISPATCH AS AN ARGUMENT, AND IT WILL ALLOW US TO COMPOSE AN OBJECT THAT WILL BE MAPPED TO PROPS WITH OUR ACTION CREATORS WRAPPED IN A DISPATCH INVOCATION
+
+//connect returns a function that receives a component as an argument
+//in other words, connect returns a higher order component
+//that returned function will pass any information we need from the Redux store's state OR an wrapped action creators to our component as props
