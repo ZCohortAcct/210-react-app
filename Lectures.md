@@ -1,9 +1,24 @@
 # Intro To React
 
 ## Key Topics
+11/03
+* Implementing Redux with React
+
+* Understanding Context
+  * Provider and Consumer
+
+* Adding in Redux
+  * Create files for Actions and Reducers
+  * Set up the store and Provide it to our App
+  * Understanding Connect, mapStateToProps, mapDispatchToProps
+  * Put it all together
+
+10/29
+* Intro to Redux, code here https://github.com/ZCohortAcct/210-intro-redux-coinSorter/
+
 10/27 
 * Code Review
-* Code Update functionalitye
+* Code Update functionality
 
 10/22
 * Code Update functionality

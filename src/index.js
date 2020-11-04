@@ -4,6 +4,14 @@ import './App.css';
 import App from './App';
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware } from 'redux'
+import toyReducer from './redux/toyReducer'
+
+const store = createStore(
+  toyReducer
+);
+
+console.log(store)
 
 ReactDOM.render(
     <Router>
