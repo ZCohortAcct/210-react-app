@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
+import { addToy } from './redux/toyActions'
+import { connect } from "react-redux";
+
 
 class ToyForm extends Component {
-  state = { 
+  state = {
     toyName: '',
     toyImage:''
    }
-  
-  
+
+
 
   handleInput = (e) => {
     this.setState({[e.target.name]: e.target.value}, () => console.log(this.state))
@@ -19,28 +22,30 @@ class ToyForm extends Component {
       "likes": 0
     }
 
-    this.props.addToyToToyArr(serverData).then( newToy => this.props.history.push(`/toys/${newToy.id}`) )
-    
-    // debugger
+    // this.props.addToyToToyArr(serverData).then( newToy => this.props.history.push(`/toys/${newToy.id}`) )
+    // this.props.addToyToToyArr(serverData).then( newToy => this.props.history.push(`/toys`) )
 
-    this.setState({ 
+    this.props.addToy(serverData, this.props.history )
+    
+
+    this.setState({
       toyName: '',
       toyImage:''
      })
-  } 
-  
+  }
+
   render() {
     return (
       <div>
         <label>Name</label>
-        <input name="toyName" 
-          onChange={this.handleInput} 
+        <input name="toyName"
+          onChange={this.handleInput}
           value={this.state.toyName}
         />
 
         <label>Image URL</label>
         <input name='toyImage'
-          onChange={this.handleInput} 
+          onChange={this.handleInput}
           value={this.state.toyImage}
         />
         <button onClick={this.makeNewToy}> Make New Toy!!</button>
@@ -59,4 +64,6 @@ class ToyForm extends Component {
 // }
 // export default SearchBar;
 
-export default ToyForm;
+
+
+export default  connect(null, { addToy })(ToyForm);

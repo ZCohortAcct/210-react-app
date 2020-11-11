@@ -62,38 +62,16 @@ class App extends React.Component {
     // console.log(e.target)
   }
 
-  addNewToy = (newToy) => {
-    return (
-      fetch("http://localhost:2000/toys", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accepts': 'application/json'
-        },
-        body: JSON.stringify(newToy)
-      })
-      .then(res => res.json())
-      .then(toy => {
-        this.setState(
-          (preState) => {
-            return {toysArray: [...preState.toysArray, toy]}
-          }, 
-          () => console.log(this.state.toysArray)
-        )
-        return toy
-        }
-      )
-    )
-  }
-
   render() {
+    console.log('rendering app')
     console.log(this.props)
+
     return (
       <div className="Main">
          < ToyHeader />
       <Switch>
         
-       <Route  path='/toys/new' render={(routerProps) => <ToyForm {...routerProps} addToyToToyArr={this.addNewToy} />}/>
+       <Route  path='/toys/new' render={(routerProps) => <ToyForm {...routerProps}  />}/>
 
         {/* <Route  path='/toys/test' component={ToyForm}/> */}
           
@@ -101,7 +79,8 @@ class App extends React.Component {
         <Route  path='/toys/:id' render={ (routerProps) => {
             // console.log(routerProps.match.params)
             const toyId = parseInt(routerProps.match.params.id)
-
+            //  console.log(this.props)
+            debugger
             const toyObj = this.props.toysArr.find(toyArrObj => toyArrObj.id === toyId)
 
             // console.log(toyObj)
@@ -109,12 +88,11 @@ class App extends React.Component {
             if (toyObj) {
               return (
               <ToyCard  key={toyObj.id}
-                        name={toyObj.name} 
-                        img={toyObj.image} 
-                        likes={toyObj.likes}
                         addLike={this.addLike}
                         id={toyObj.id}
-                        deleteToy={this.deleteToy}
+                        name={toyObj.name}
+                        img={toyObj.image}
+                        likes={toyObj.likes}
               />
             )
             } else {
@@ -153,13 +131,13 @@ class App extends React.Component {
 const mSTP = (store) => store // give access to getState() frm store
 
   
-const mDSTP = (dispatch) => { // give access to dispatch() frm store
+const mDTP = (dispatch) => { // give access to dispatch() frm store
   return {
     getToysWithDispatch: () => dispatch(getToys())
   }
 }
 
-export default connect(mSTP, mDSTP)(App)
+export default connect(mSTP, mDTP)(App)
 
 //CONNECT TAKES TWO ARGUMENTS
 //THE FIRST ARGUMENT IS A FUNCTION THAT WILL RECEIVE STATE FROM CONNECT AS AN ARGUMENT

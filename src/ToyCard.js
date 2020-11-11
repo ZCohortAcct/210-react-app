@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux";
 import { deleteToy } from './redux/toyActions'
+import { Link } from "react-router-dom";
 
 class ToyCard extends React.PureComponent {
   
@@ -12,17 +13,25 @@ class ToyCard extends React.PureComponent {
     this.props.deleteToyWithDispatch(parseInt(e.target.dataset.toyid))
   }
 
-  render(){
-    console.log('rendering ToyCard')
+  render() {
+    // console.log(this.props)
+    // let obj = this.props
+    // if (this.props.viewToyId) {
+    //   obj = this.findObj()
+    // }
+    const {name, img, likes, addLike, id} = this.props
+
+
     return (
+        
       <div className="card">
-           <h2> {this.props.name} </h2>
-           <img alt={this.props.name} src={this.props.img} className="toy-avatar"/>
-           <p>{this.props.likes}  Likes </p>
-           <button 
+          <Link to={`/toys/${id}`}> <h2> {name} </h2> </Link>
+          <img alt={name} src={img} className="toy-avatar"/>
+          <p>{likes}  Likes </p>
+          <button 
             className="like-btn" 
-            onClick={this.props.addLike}
-            data-toyid={this.props.id}
+            onClick={addLike}
+            data-toyid={id}
             >
               Like &lt;3
             </button> 
@@ -32,11 +41,12 @@ class ToyCard extends React.PureComponent {
             onClick={this.props.deleteToy}
             // onClick={(e) => this.props.deleteToy(e.target.dataset.toyid)}
             // onClick={this.props.deleteToyWithDispatch}
-            data-toyid={this.props.id}
+            data-toyid={id}
             >
               Remove
             </button> 
       </div>
+     
     );
   }
 }
@@ -47,5 +57,9 @@ class ToyCard extends React.PureComponent {
 //   }
 // }
 
+
+
 export default connect(null, { deleteToy })(ToyCard);
 // export default connect(null, mDTP)(ToyCard);
+
+//let deleteToy = () => dispatch(deleteToy(toyID)) // == { deleteToy }
